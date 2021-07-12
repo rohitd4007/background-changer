@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const date = new Date().toLocaleString();
+  const [curDate, setCurDate] = useState();
+  const [lastDigit, setLastDigit] = useState();
+  const [styles, setStyle] = useState();
+  const date1 = new Date();
+  console.log(date1);
+  const showDate = () => {
+    setCurDate(new Date());
+    let sec = new Date().getSeconds();
+    setLastDigit(sec);
+    if (sec % 2 === 0) setStyle({ backgroundColor: "black", color: "white" });
+    else setStyle({ backgroundColor: "white" });
+  };
+
+  setTimeout(showDate, 1000);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={styles}>
+      <div className="show-date">{date}</div>
     </div>
   );
 }
